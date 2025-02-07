@@ -1,0 +1,44 @@
+# always has my heart
+#theme=Kanagawa Dragon
+
+# damn solid
+#theme=flexoki-dark
+
+# very meh
+#theme=Firewatch
+
+# minor contrast alert
+#theme=gruber-darker
+
+# contrast alert
+#theme=Monokai Remastered
+
+# easy looking
+theme=SleepyHollow
+
+window-decoration=false
+gtk-titlebar=false
+gtk-tabs-location=bottom
+gtk-wide-tabs=false
+adw-toolbar-style=flat
+font-size=10
+
+keybind = ctrl+t>n=new_tab
+keybind = ctrl+t>h=last_tab
+keybind = ctrl+t>l=next_tab
+keybind = ctrl+t>ctrl+t=toggle_tab_overview
+
+keybind = ctrl+w>q=close_surface
+keybind = ctrl+w>k=new_split:up
+keybind = ctrl+w>j=new_split:down
+keybind = ctrl+w>l=new_split:left
+keybind = ctrl+w>h=new_split:right
+
+keybind = ctrl+w>ctrl+k=goto_split:top
+keybind = ctrl+w>ctrl+j=goto_split:bottom
+keybind = ctrl+w>ctrl+l=goto_split:left
+keybind = ctrl+w>ctrl+h=goto_split:right
+keybind = ctrl+w>ctrl+e=equalize_splits
+
+keybind = global:cmd+t=toggle_quick_terminal
+
