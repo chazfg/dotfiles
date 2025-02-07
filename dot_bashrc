@@ -9,7 +9,7 @@ export EDITOR=nvim
 # alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
 . "$HOME/.cargo/env"
-alias ll='ls -alF'
+alias ll='ls -ahlF'
 alias ..='cd ..'
 alias ...='cd ../..'
 
