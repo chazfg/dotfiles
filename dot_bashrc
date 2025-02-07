@@ -1,0 +1,102 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# alias ls='ls --color=auto'
+# alias grep='grep --color=auto'
+# PS1='[\u@\h \W]\$ '
+. "$HOME/.cargo/env"
+alias ll='ls -alF'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# pacman commands
+alias spm='sudo pacman'
+alias spms='sudo pacman -S'
+alias spmr='sudo pacman -R'
+alias thist='history | tail -n'
+alias czm='chezmoi'
+#function append_hist() {
+#  OPTIND=1 # Reset in case getopts has been used previously in the shell.
+#
+#  # Initialize our own variables:
+#  number_lines=20
+#  output_file=$(date -Iminutes).hist${number_lines}
+#  output_dir=${HOME}/.snips
+#  while getopts ":hond?:" opt; do
+#    case "$opt" in
+#    h | \?)
+#      show_help
+#      return
+#      ;;
+#    o)
+#      output_file=$OPTARG
+#      ;;
+#    n)
+#      number_lines= >&2
+#      ;;
+#    d)
+#      output_dir=$OPTARG
+#      ;;
+#    esac
+#  done
+#
+#  shift $((OPTIND - 1))
+#
+#  [ "${1:-}" = "--" ] && shift
+#
+#  echo "number_lines=$number_lines, output_dir=$output_dir, output_file='$output_file', Leftovers: $@"
+#  EOF
+#}o
+function append_hist() {
+  LONGOPTS=output_file,output_dir,number_lines
+  OPTIONS=don:a
+
+  PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
+  # read getopt’s output this way to handle the quoting right:
+  eval set -- "$PARSED"
+
+  output_file=$(date -Iminutes)
+  output_dir=${HOME}/.snips
+  if ! test -d ${output_dir}; then
+    mkdir ${output_dir}
+  fi
+  # now enjoy the options in order and nicely split until we see --
+  while true; do
+    case "$1" in
+    -d | --output_dir)
+      output_dir="$2"
+      shift 2
+      ;;
+    -o | --output_file)
+      output_file="$2"
+      shift 2
+      ;;
+    -n | --number_lines)
+      number_lines="$2"
+      shift 2
+      ;;
+    -a)
+      append=y
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    esac
+  done
+
+  # handle non-option arguments
+  #lines_to_add=$(history | tail -n ${number_lines})
+  #echo $(echo ${lines_to_add} | wc -l)
+  output_location=${output_dir}/${output_file}
+  history | tail -n ${number_lines} >${output_location}
+  lines_written=$(wc -l <${output_location})
+  echo "wrote ${lines_written} lines to ${output_location}"
+}
+alias ahist='append_hist'
+alias svim='sudo nvim'
