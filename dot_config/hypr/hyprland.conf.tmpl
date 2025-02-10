@@ -1,27 +1,10 @@
 {{ if eq .chezmoi.hostname "bigkep" }}
 {{ .home.monitor }}
 {{ else if eq .chezmoi.hostname "zpbeef" }}
-{{ .work.monitor }}
+{{ .work.preamble }}
 {{ end }}
 
-exec-once = hyprpaper
-exec-once = pipewire
-exec-once = wireplumber
-exec-once = pipewire-pulse
-exec-once = waybar
 
-exec-once = swww init
-exec-once = swww img ~/Downloads/bg.jpg
-exec-once = dunst
-exec-once= hyprctl setcursor Bibata-Modern-Ice 24
-
-# Some default env vars.
-#env = XCURSOR_SIZE,24
-
-env = HYPRCURSOR_THEME,Bibata-Modern-Ice  # Replace Bibata-Modern-Ice with the name of the theme you dosn>
-env = HYPRCURSOR_SIZE,24                  # Replace 24 with your desired size
-env = XCURSOR_THEME,Bibata-Modern-Ice
-env = XCURSOR_SIZE,24
 
 # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
@@ -32,11 +15,6 @@ input {
     kb_rules =
 
     follow_mouse = 1
-
-    touchpad {
-        natural_scroll = no
-        clickfinger_behavior = 1
-    }
 
     sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 }
@@ -85,6 +63,9 @@ animations {
     animation = workspaces, 1, 2, default
 }
 
+cursor {
+    no_hardware_cursors = true
+  }
 dwindle {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
     pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
@@ -101,8 +82,8 @@ gestures {
     workspace_swipe = off
 }
 misc {
-
-disable_hyprland_logo=true
+    force_default_wallpaper = 1 # Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = true # If true disables the random hyprland logo / anime girl background. :(
 }
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
@@ -112,43 +93,17 @@ disable_hyprland_logo=true
 xwayland {
   force_zero_scaling = true
 }
-# Example windowrule v1
-# windowrule = float, ^(kitty)$
-# Example windowrule v2
-# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-windowrulev2 = fullscreen,class:^(wlroots)$
+{{ if eq .chezmoi.hostname "bigkep" }}
+{{ .home.monitor }}
+{{ else if eq .chezmoi.hostname "zpbeef" }}
+{{ .work.workspaces }}
+{{ end }}
 
-workspace = special:scratchpad, on-created-empty:obsidian
-workspace = special:vpnConn, on-created-empty:alacritty
-workspace = special:obsidianNotes, on-created-empty:obsidian
-workspace = special:browser, on-created-empty:google-chrome-stable
-bind = WIN_SHIFT, B, movetoworkspace, special:browserWorkspace
-
-# See https://wiki.hyprland.org/Configuring/Keywords/ for more
-$mainMod = SUPER
-bind = $mainMod, S, togglespecialworkspace, scratchpad
-bind = $mainMod, Y, togglespecialworkspace, vpnConn
-bind = $mainMod, N, togglespecialworkspace, obsidianNotes
-bind = $mainMod, B, togglespecialworkspace, browser
-# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, RETURN, exec, ghostty
-bind = $mainMod, Q, killactive
-bind = WIN_SHIFT, E, exit, 
-#bind = $mainMod, E, exec, dolphin
-bind = $mainMod, V, togglefloating, 
-bind = $mainMod, D, exec, wofi --show drun
-bind = $mainMod, P, exec, subl # dwindle
-bind = $mainMod, J, togglesplit, # dwindle
-bind = $mainMod, O, exec, google-chrome-stable
-# bind = $mainMod, O, exec, vivaldi
-binde = ,XF86AudioRaiseVolume, exec, pamixer -i 2
-binde = ,XF86AudioLowerVolume, exec, pamixer -d 2
-bind = , XF86AudioMute, exec, pamixer -m
-bind = $mainMod, XF86AudioMute, exec, pamixer -u
-bind = WIN_SHIFT, S, exec, grim -g "$(slurp)"
-bind = ,XF86MonBrightnessDown, exec, xbacklight -dec 10
-bind = ,XF86MonBrightnessUp, exec, xbacklight -inc 10
+{{ if eq .chezmoi.hostname "bigkep" }}
+{{ .home.monitor }}
+{{ else if eq .chezmoi.hostname "zpbeef" }}
+{{ .work.binds }}
+{{ end }}
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
