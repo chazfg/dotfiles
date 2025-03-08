@@ -12,6 +12,10 @@ export EDITOR=nvim
 alias ll='ls -ahlF'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias hcd='cd "$(dirname $(find ~/* -type f | fzf))"'
+alias gcd='cd "$(dirname $(find /* -type f | fzf))"'
+alias hcp='cp "$(find ~/* -type f | fzf)" .'
+alias gcp='cp "$(find /* -type f | fzf)" .'
 
 # pacman commands
 alias spm='sudo pacman'
@@ -100,5 +104,6 @@ function append_hist() {
 }
 alias ahist='append_hist'
 alias svim='sudo nvim'
-{{ eq .chezmoi.hostname "bigkep" }}
+{{ if eq .chezmoi.hostname "bigkep" }}
 {{ .home.bashrc }}
+{{ end }}
