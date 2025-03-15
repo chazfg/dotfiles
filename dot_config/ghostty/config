@@ -25,6 +25,7 @@ font-size=10
 clipboard-read=allow
 clipboard-write=allow
 copy-on-select=clipboard
+app-notifications=no-clipboard-copy
 
 keybind = ctrl+t>n=new_tab
 keybind = ctrl+t>h=last_tab
