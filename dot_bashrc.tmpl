@@ -1,6 +1,9 @@
+{{ if ne .chezmoi.hostname "zpsvr07" }}
 #
 # ~/.bashrc
 #
+export HISTSIZE=5000
+export HISTFILESIZE=10000
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -10,13 +13,16 @@ export EDITOR=nvim
 # PS1='[\u@\h \W]\$ '
 . "$HOME/.cargo/env"
 alias ll='ls -ahlF'
+alias el='eza -ahlF'
+alias es='eza'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias hcd='cd "$(dirname $(find ~/* -type f | fzf))"'
 alias gcd='cd "$(dirname $(find /* -type f | fzf))"'
 alias hcp='cp "$(find ~/* -type f | fzf)" .'
 alias gcp='cp "$(find /* -type f | fzf)" .'
-
+alias hist='eval "$(history | sk | awk '\''{$1=""; sub(/^ /, ""); print}'\'')"'
+alias bhist='eval "$(cat ~/.bash_history | sk)"'
 # pacman commands
 alias spm='sudo pacman'
 alias spms='sudo pacman -S'
@@ -106,4 +112,7 @@ alias ahist='append_hist'
 alias svim='sudo nvim'
 {{ if eq .chezmoi.hostname "bigkep" }}
 {{ .home.bashrc }}
+{{ end }}
+{{ else }}
+{{ .zp7.bashrc }}
 {{ end }}
