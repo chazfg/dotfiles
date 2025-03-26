@@ -1,3 +1,4 @@
+{{ if ne .chezmoi.hostname "zpsvr07" }}
 #
 # ~/.bashrc
 #
@@ -111,4 +112,7 @@ alias ahist='append_hist'
 alias svim='sudo nvim'
 {{ if eq .chezmoi.hostname "bigkep" }}
 {{ .home.bashrc }}
+{{ end }}
+{{ else }}
+{{ .zp7.bashrc }}
 {{ end }}
