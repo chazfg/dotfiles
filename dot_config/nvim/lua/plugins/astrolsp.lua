@@ -42,7 +42,6 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
@@ -52,6 +51,20 @@ return {
             },
           },
         },
+      },
+      basedpyright = {
+        before_init = function(_, config)
+          local venv = config.root_dir .. "/.venv/bin/python"
+          if vim.fn.executable(venv) == 1 then
+            config.settings = config.settings or {}
+            config.settings.python = config.settings.python or {}
+            config.settings.python.pythonPath = venv
+          else
+            config.settings = config.settings or {}
+            config.settings.python = config.settings.python or {}
+            config.settings.python.pythonPath = vim.fn.exepath("python3")
+          end
+        end,
       },
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
@@ -105,7 +118,7 @@ return {
           end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
-            return client:supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
+            return client.supports_method("textDocument/semanticTokens/full") and vim.lsp.semantic_tokens ~= nil
           end,
         },
       },
