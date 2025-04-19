@@ -71,14 +71,6 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        -- toggle terminal
-        ["<Leader>tt"] = {
-          function()
-            require("toggleterm").toggle()
-          end,
-          desc = "Toggle Terminal",
-        },
-
         -- navigate splits
         --["<Leader>"]
         -- tables with just a `desc` key will be registered with which-key if it's installed
