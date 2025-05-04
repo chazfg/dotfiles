@@ -1,0 +1,48 @@
+anchor_to_edges = true
+position = "top"
+height = 36
+
+[[start]]
+type = "workspaces"
+all_monitors = false
+
+[[center]]
+type = "custom"
+
+[[center.bar]]
+type = "button"
+label = ""
+on_click = "!wofi --show run"
+
+# [[start]]
+# type = "launcher"
+# favorites = ["firefox", "discord", "steam"]
+# show_names = false
+# show_icons = true
+
+[[end]]
+type = "label"
+label = "{{poll:5000:~/.local/bin/ironbar_netman}}"
+
+[[end]]
+type = "sys_info"
+format = ["  {cpu_percent: <3.2}%", " {memory_percent}% | {memory_used:1} GB"]
+#
+[end.interval]
+memory = 5
+cpu = 5
+temps = 5
+disks = 300
+networks = 3
+
+[[end]]
+type = "clipboard"
+max_items = 3
+
+[end.truncate]
+mode = "end"
+length = 50
+
+
+[[end]]
+type = "clock"
