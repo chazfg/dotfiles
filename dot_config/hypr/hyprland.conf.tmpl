@@ -10,11 +10,11 @@
 {{ .work.monitor }}
 {{ end }}
 
-exec-once = dbus-launch pipewire
-exec-once = dbus-launch wireplumber
-exec-once = dbus-launch pipewire-pulse
-exec-once = dbus-launch waybar
-exec-once = dbus-launch dunst
+exec-once = pipewire
+exec-once = wireplumber
+exec-once = pipewire-pulse
+exec-once = dunst
+exec-once = ironbar
 
 exec-once = gsettings set org.gnome.desktop.interface cursor-theme BreezeX-RosePine-Linux
 exec-once = gsettings set org.gnome.desktop.interface cursor-size 28
@@ -117,7 +117,7 @@ xwayland {
 {{ end }}
 
 $mainMod = SUPER
-bind = $mainMod, RETURN, exec, ghostty
+bind = $mainMod, RETURN, exec, foot
 bind = $mainMod, Q, killactive
 bind = WIN_SHIFT, E, exit, 
 bind = $mainMod, V, togglefloating, 

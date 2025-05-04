@@ -12,9 +12,8 @@ export EDITOR=nvim
 # alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
 . "$HOME/.cargo/env"
-alias ll='ls -ahlF'
-alias el='eza -aghlF'
-alias es='eza'
+alias ll='eza -ahlF'
+alias ls='eza'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias hcd='cd "$(dirname $(fd . ~/* -t f | sk))"'
