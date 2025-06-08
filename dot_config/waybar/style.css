@@ -1,0 +1,235 @@
+/* Keyframes */
+
+@keyframes blink-critical {
+  to {
+    /*color: @white;*/
+    background-color: @critical;
+  }
+}
+
+/* Styles */
+
+@define-color color_bg_dark #121318; /* Even darker for hover */
+@define-color color_bg #1b1d23; /* Dark misty night */
+@define-color color_border #2e3440; /* Cold border, not warm */
+@define-color black	#0a0e14;
+@define-color red	#ff3333;
+@define-color green	#ff8f40;
+@define-color yellow	#e6b450;
+@define-color blue	#53A3D5;
+@define-color purple	#a37acc;
+@define-color aqua	#73d0ff;
+@define-color gray	#b3b1ad;
+@define-color brgray	#cbccc6;
+@define-color brred	#f07178;
+@define-color brgreen	#bae67e;
+@define-color bryellow	#ffee99;
+@define-color brblue	#95e6cb;
+@define-color brpurple	#d4bfff;
+@define-color braqua	#A9FFF7;
+@define-color white	#fafafa;
+@define-color bg2	#b3b1ad;
+
+@define-color warning 	@bryellow;
+@define-color critical	@red;
+@define-color mode	@black;
+@define-color unfocused	@bg2;
+@define-color focused	@braqua;
+@define-color inactive	@purple;
+@define-color sound	@brpurple;
+@define-color network	@blue;
+@define-color memory	@purple;
+@define-color cpu	@green;
+@define-color temp	@brgreen;
+@define-color layout	@bryellow;
+@define-color battery	@blue;
+@define-color date	@black;
+@define-color time	@white;
+
+/*@define-color newbg @focused;*/
+@define-color newbg rgb(109, 201, 224);
+/* Reset all styles */
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+/* The whole bar */
+
+#waybar {
+  border: none;
+  background: @color_bg;
+  box-shadow: none;
+  font-family: Iosevka Nerd Font;
+  font-size: 11pt;
+  /*font-weight: bold;*/
+}
+
+/* Each module */
+#battery,
+#clock,
+#cpu,
+#language,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#backlight,
+#idle_inhibitor,
+#disk,
+#user,
+#mpris {
+  padding-left: 8pt;
+  padding-right: 8pt;
+}
+
+/* Each critical module */
+#mode,
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical.discharging {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-name: blink-critical;
+  animation-duration: 1s;
+}
+
+/* Each warning */
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning.discharging {
+  color: @warning;
+}
+
+/* And now modules themselves in their respective order */
+#custom-app_tray {
+  padding: 0;
+  margin: 0;
+  font-size: 14pt;
+}
+
+/* Workspaces stuff */
+#workspaces {
+  background: @unfocused;
+  border-radius: 6px;
+}
+
+#workspaces button {
+  /*font-weight: bold;*/
+  padding-left: 2pt;
+  border-radius: 6px;
+  padding-right: 2pt;
+  padding-top: 2pt;
+  color: @black;
+  background: @unfocused;
+}
+
+/* Inactive (on unfocused output) */
+/* #workspaces button.unfocused { */
+/* color: @white; */
+/* background: gray; */
+
+/* } */
+
+/* Active (on focused output) */
+#workspaces button.active {
+  color: @black;
+  background: @focused;
+  animation: 3s linear 1s 1 normal;
+}
+
+/* Contains an urgent window */
+#workspaces button.urgent {
+  color: @black;
+  background: @warning;
+}
+
+/* Style when cursor is on the button */
+#window {
+  /* margin-right: 35pt; */
+  /* margin-left: 35pt; */
+  color: black;
+  background: rgb(89, 172, 221);
+  border-radius: 6px;
+  /* padding: 0px 8px 0px 8px; */
+}
+
+#pulseaudio {
+  background: @newbg;
+  color: @black;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#network {
+  background: @newbg;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+  color: @black;
+  border-radius: 6px 0px 0px 6px;
+}
+
+#memory {
+  background: @newbg;
+  color: @black;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#cpu {
+  background: @newbg;
+  color: @black;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#temperature {
+  background: @temp;
+  color: @black;
+}
+
+#language {
+  background: @layout;
+  color: @black;
+}
+
+#battery {
+  background: @newbg;
+  color: @black;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#tray {
+  background: @newbg;
+}
+
+#clock.date {
+  background: @newbg;
+  color: @black;
+  border-right-color: @black;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#clock.time {
+  background: @newbg;
+  color: @black;
+  border-radius: 0px 6px 6px 0px;
+}
